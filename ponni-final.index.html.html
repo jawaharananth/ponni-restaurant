@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponni — Chettinad Kitchen · Chennai</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Playfair+Display+SC:wght@400;700&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#13100A;--ink2:#1E1810;--ink3:#2A200E;
+  --parchment:#F8F2E8;--ivory:#FDFAF4;--warm:#F0E8D8;--cream:#FAF6EE;
+  --gold:#A67C0A;--gold2:#C49A1A;--gold3:#E8C060;--gold-pale:#F5E8C0;
+  --sage:#2A4A32;--sage2:#3A6044;--sage3:#4E7A58;
+  --copper:#8B4A18;--copper2:#A85E28;
+  --muted:#7A6848;--muted2:#5A5040;
+  --border:#DDD0B8;--border2:#C8B898;--border3:#B8A880;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--parchment);color:var(--ink);overflow-x:hidden;}
+.wm{position:absolute;pointer-events:none;z-index:0;}
+
+/* ══════════════════════════════════
+   LOGO SYSTEM
+══════════════════════════════════ */
+.ponni-logo{display:flex;align-items:center;gap:1rem;text-decoration:none;}
+.ponni-logo-mark{width:44px;height:44px;flex-shrink:0;}
+.ponni-logo-text{display:flex;flex-direction:column;gap:0;}
+.ponni-logo-name{
+  font-family:'Playfair Display SC',serif;
+  font-size:1.15rem;font-weight:400;
+  color:var(--ink);letter-spacing:0.2em;
+  line-height:1;
+}
+.ponni-logo-divider{
+  width:100%;height:1px;
+  background:linear-gradient(to right,var(--gold2),var(--gold),transparent);
+  margin:4px 0 3px;
+}
+.ponni-logo-sub{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.5rem;font-weight:300;
+  letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--muted);
+}
+.ponni-logo-inv .ponni-logo-name{color:#fff;}
+.ponni-logo-inv .ponni-logo-sub{color:rgba(255,255,255,0.38);}
+.ponni-logo-inv .ponni-logo-divider{background:linear-gradient(to right,var(--gold3),var(--gold2),transparent);}
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:1.1rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,242,232,0.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+.nav-links{display:flex;gap:3.5rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.7rem;font-weight:300;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.25s;
+  position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;
+  bottom:0;left:0;width:0;height:1px;
+  background:var(--gold2);
+  transition:width 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a:hover::after{width:100%;}
+.nav-book{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.68rem;font-weight:400;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ivory)!important;
+  background:var(--sage);
+  padding:0.7rem 1.8rem;
+  border-radius:1px;
+  text-decoration:none;
+  transition:all 0.25s!important;
+  box-shadow:0 4px 20px rgba(42,74,50,0.2);
+}
+.nav-book::after{display:none!important;}
+.nav-book:hover{background:var(--sage2)!important;transform:translateY(-1px)!important;box-shadow:0 8px 28px rgba(42,74,50,0.25)!important;}
+
+/* ══════════════════════════════════
+   HERO — full cinematic viewport
+══════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  padding-top:66px;
+}
+/* Full bleed photo right side */
+.hero-bg{
+  position:absolute;
+  right:0;top:0;bottom:0;
+  width:56%;
+  background-image:url('https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&q=90');
+  background-size:cover;background-position:center;
+}
+.hero-bg-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, var(--parchment) 0%, rgba(248,242,232,0.6) 40%, transparent 70%),
+    linear-gradient(to top, rgba(19,16,10,0.5) 0%, transparent 50%);
+}
+/* Content sits over everything */
+.hero-content{
+  position:relative;z-index:2;
+  padding:5rem 5rem;
+  max-width:700px;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:calc(100vh - 66px);
+}
+.hero-overline{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:2.8rem;
+  opacity:0;animation:fadeUp 0.8s 0.2s ease forwards;
+}
+.hero-overline-dash{width:36px;height:1px;background:var(--gold2);}
+.hero-overline-text{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.6rem;font-weight:300;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--gold2);
+}
+/* Big editorial headline */
+.hero-h{
+  font-family:'Playfair Display',serif;
+  font-weight:400;line-height:1.06;
+  color:var(--ink);
+  opacity:0;
+}
+.hero-h1{font-size:clamp(3.5rem,6vw,5.5rem);animation:fadeUp 1s 0.35s ease forwards;}
+.hero-h2{font-size:clamp(3.5rem,6vw,5.5rem);font-style:italic;color:var(--copper);animation:fadeUp 1s 0.5s ease forwards;}
+.hero-h3{
+  font-size:clamp(3.5rem,6vw,5.5rem);
+  color:var(--ink);opacity:0!important;
+  animation:fadeUpFaint 1s 0.65s ease forwards;
+}
+@keyframes fadeUpFaint{from{opacity:0;transform:translateY(24px);}to{opacity:0.14;transform:translateY(0);}}
+.hero-body{
+  font-size:0.92rem;font-weight:300;
+  color:var(--muted);line-height:2.1;
+  max-width:420px;margin-top:2.2rem;
+  opacity:0;animation:fadeUp 1s 0.8s ease forwards;
+}
+.hero-actions{
+  display:flex;gap:1.5rem;align-items:center;
+  margin-top:3rem;
+  opacity:0;animation:fadeUp 1s 0.95s ease forwards;
+}
+.btn-sage{
+  background:var(--sage);color:var(--ivory);
+  padding:0.92rem 2.4rem;border-radius:1px;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.7rem;font-weight:400;
+  letter-spacing:0.16em;text-transform:uppercase;
+  text-decoration:none;
+  transition:all 0.28s;
+  box-shadow:0 6px 28px rgba(42,74,50,0.22);
+}
+.btn-sage:hover{background:var(--sage2);transform:translateY(-2px);box-shadow:0 12px 36px rgba(42,74,50,0.28);}
+.btn-outline-sage{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.7rem;font-weight:300;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  border-bottom:1px solid var(--border2);
+  padding-bottom:2px;
+  display:flex;align-items:center;gap:0.7rem;
+  transition:all 0.25s;
+}
+.btn-outline-sage-arrow{width:20px;height:1px;background:currentColor;transition:width 0.3s;}
+.btn-outline-sage:hover{color:var(--ink);border-color:var(--ink);}
+.btn-outline-sage:hover .btn-outline-sage-arrow{width:36px;}
+/* Floating stats card */
+.hero-stats{
+  position:absolute;
+  bottom:3.5rem;right:2.5rem;
+  z-index:3;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:2px;
+  padding:1.4rem 2rem;
+  display:flex;gap:2.5rem;
+  opacity:0;animation:fadeUp 1s 1.1s ease forwards;
+}
+.hstat-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;font-weight:400;
+  color:var(--gold3);display:block;line-height:1;
+}
+.hstat-label{
+  font-size:0.58rem;font-weight:300;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);margin-top:0.3rem;display:block;
+}
+/* Thin vertical gold line right edge of content */
+.hero-vline{
+  position:absolute;left:44%;top:8%;bottom:8%;
+  width:1px;
+  background:linear-gradient(to bottom,transparent,var(--gold2),transparent);
+  opacity:0.2;z-index:2;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══════════════════════════════════
+   MARQUEE
+══════════════════════════════════ */
+.marquee{
+  background:var(--ink2);
+  padding:0.88rem 0;overflow:hidden;
+  border-top:1px solid rgba(164,120,10,0.18);
+  border-bottom:1px solid rgba(164,120,10,0.12);
+}
+.marquee-track{display:flex;animation:mq 34s linear infinite;white-space:nowrap;}
+.mq-i{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.6rem;font-weight:200;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);
+  padding:0 3rem;flex-shrink:0;
+  display:flex;align-items:center;gap:0.8rem;
+}
+.mq-gem{color:var(--gold2);font-size:0.35rem;}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ══════════════════════════════════
+   SECTION LABEL
+══════════════════════════════════ */
+.s-label{
+  display:flex;align-items:center;gap:0.9rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.58rem;font-weight:300;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--copper2);margin-bottom:1.4rem;
+}
+.s-label::before{content:'';width:24px;height:1px;background:var(--copper2);}
+
+/* ══════════════════════════════════
+   STORY — asymmetric overlap layout
+══════════════════════════════════ */
+.story{
+  background:var(--ivory);
+  padding:9rem 5rem;
+  display:grid;grid-template-columns:1.05fr 1fr;
+  gap:0;
+  position:relative;overflow:hidden;
+}
+/* Photo composition */
+.story-photos{
+  position:relative;height:600px;
+  padding-right:3rem;
+}
+.sp-main{
+  position:absolute;left:0;top:0;
+  width:78%;height:480px;
+  overflow:hidden;border-radius:2px;
+  box-shadow:0 24px 80px rgba(19,16,10,0.16);
+}
+.sp-main img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease;}
+.sp-main:hover img{transform:scale(1.04);}
+.sp-accent{
+  position:absolute;right:3rem;bottom:0;
+  width:54%;height:310px;
+  overflow:hidden;border-radius:2px;
+  box-shadow:0 24px 80px rgba(19,16,10,0.16);
+  border:5px solid var(--ivory);
+}
+.sp-accent img{width:100%;height:100%;object-fit:cover;}
+/* Gold corner frame */
+.sp-frame{
+  position:absolute;left:-12px;top:-12px;
+  width:120px;height:120px;
+  border-top:1px solid var(--gold2);
+  border-left:1px solid var(--gold2);
+  opacity:0.45;pointer-events:none;
+}
+/* Oversized ghost year */
+.sp-ghost{
+  position:absolute;right:3.5rem;top:50%;
+  transform:translateY(-50%);
+  font-family:'Playfair Display',serif;
+  font-size:9rem;font-weight:700;
+  color:var(--ink);opacity:0.03;
+  line-height:1;pointer-events:none;
+  writing-mode:vertical-rl;
+}
+/* Story text */
+.story-text{
+  padding-left:4rem;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  position:relative;z-index:1;
+}
+.story-text h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,3.2vw,3rem);
+  font-weight:400;line-height:1.2;
+  margin-bottom:1.8rem;color:var(--ink);
+}
+.story-text p{
+  font-size:0.88rem;font-weight:300;
+  color:var(--muted);line-height:2.1;
+  margin-bottom:1.1rem;
+}
+/* Big italic pull-out quote */
+.story-pull{
+  margin-top:2.2rem;
+  padding:1.8rem 2rem;
+  background:var(--gold-pale);
+  border-left:2px solid var(--gold2);
+  border-radius:0 2px 2px 0;
+  position:relative;
+}
+.story-pull::before{
+  content:'"';
+  position:absolute;top:-0.6rem;left:1.2rem;
+  font-family:'Playfair Display',serif;
+  font-size:4rem;color:var(--gold2);opacity:0.3;
+  line-height:1;
+}
+.story-pull blockquote{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-style:italic;font-weight:400;
+  color:var(--copper);line-height:1.85;
+}
+.story-pull cite{
+  display:block;margin-top:0.8rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.62rem;font-style:normal;font-weight:300;
+  color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;
+}
+
+/* ══════════════════════════════════
+   PILLARS ROW
+══════════════════════════════════ */
+.pillars{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--ink);
+}
+.pillar{
+  padding:3.5rem 2.8rem;
+  border-right:1px solid rgba(255,255,255,0.05);
+  position:relative;overflow:hidden;
+  transition:background 0.35s;
+}
+.pillar:last-child{border-right:none;}
+.pillar::before{
+  content:'';position:absolute;
+  left:0;bottom:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold2),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.pillar:hover{background:rgba(255,255,255,0.03);}
+.pillar:hover::before{transform:scaleX(1);}
+.pillar-n{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:400;
+  color:var(--gold2);opacity:0.4;
+  display:block;margin-bottom:1.2rem;line-height:1;
+}
+.pillar h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:400;
+  color:rgba(255,255,255,0.88);
+  margin-bottom:0.6rem;
+}
+.pillar p{
+  font-size:0.74rem;font-weight:300;
+  color:rgba(255,255,255,0.32);line-height:1.85;
+}
+
+/* ══════════════════════════════════
+   MENU — staggered luxury layout
+══════════════════════════════════ */
+.menu-sec{
+  padding:9rem 5rem;
+  background:var(--parchment);
+  position:relative;overflow:hidden;
+}
+.menu-top{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:4rem;position:relative;z-index:1;
+}
+.menu-top h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,3.2vw,3rem);
+  font-weight:400;line-height:1.18;color:var(--ink);
+}
+.menu-top-right{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;}
+.menu-tabs{display:flex;gap:0.5rem;}
+.mt{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.62rem;font-weight:300;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;
+  border:1px solid var(--border);
+  background:transparent;padding:0.48rem 1.1rem;
+  border-radius:1px;transition:all 0.25s;
+}
+.mt:hover{border-color:var(--border2);color:var(--ink);}
+.mt.active{background:var(--ink);color:var(--ivory);border-color:var(--ink);}
+.view-all{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.62rem;font-weight:300;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--sage);text-decoration:none;
+  border-bottom:1px solid var(--sage3);
+  padding-bottom:2px;transition:opacity 0.2s;
+}
+.view-all:hover{opacity:0.65;}
+
+/* Grid — asymmetric: one large card + 4 regular + 1 wide */
+.menu-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:16px;
+  position:relative;z-index:1;
+}
+.mc{
+  border-radius:2px;overflow:hidden;position:relative;
+  cursor:pointer;
+  box-shadow:0 4px 24px rgba(19,16,10,0.10);
+  transition:transform 0.45s cubic-bezier(0.23,1,0.32,1),box-shadow 0.45s;
+}
+.mc:hover{transform:translateY(-7px);box-shadow:0 28px 70px rgba(19,16,10,0.18);}
+.mc-featured{grid-row:span 2;}
+.mc-img{
+  background-size:cover;background-position:center;
+  transition:transform 0.7s ease;
+}
+.mc:hover .mc-img{transform:scale(1.06);}
+.mc-featured .mc-img{height:520px;}
+.mc:not(.mc-featured) .mc-img{height:240px;}
+.mc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(19,16,10,0.88) 0%,rgba(19,16,10,0.25) 55%,transparent 80%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:1.8rem;
+}
+.mc-tag{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.52rem;font-weight:300;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--gold3);
+  display:flex;align-items:center;gap:0.5rem;
+  margin-bottom:0.5rem;
+}
+.mc-tag::before{content:'';width:14px;height:1px;background:var(--gold3);}
+.mc h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:400;
+  color:#fff;line-height:1.25;margin-bottom:0.35rem;
+}
+.mc-featured h3{font-size:1.6rem;}
+.mc-desc{
+  font-size:0.7rem;font-weight:300;
+  color:rgba(255,255,255,0.48);line-height:1.75;
+  margin-bottom:1rem;
+  max-height:0;overflow:hidden;
+  transition:max-height 0.45s ease,opacity 0.4s;opacity:0;
+}
+.mc:hover .mc-desc{max-height:80px;opacity:1;}
+.mc-footer{display:flex;justify-content:space-between;align-items:center;}
+.mc-price{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:400;color:var(--gold3);
+}
+.mc-vd{
+  width:18px;height:18px;border-radius:2px;
+  border:1.5px solid;
+  display:flex;align-items:center;justify-content:center;
+}
+.mc-vd.v{border-color:#6FCF97;color:#6FCF97;}
+.mc-vd.nv{border-color:var(--copper2);color:var(--copper2);}
+.mc-vd::after{content:'●';font-size:0.4rem;}
+
+/* ══════════════════════════════════
+   FULL-WIDTH QUOTE BREAK
+══════════════════════════════════ */
+.quote-break{
+  background:var(--ink3);
+  padding:8rem 5rem;
+  position:relative;overflow:hidden;
+}
+.qb-inner{
+  max-width:900px;margin:0 auto;text-align:center;
+  position:relative;z-index:1;
+}
+.qb-mark{
+  font-family:'Playfair Display',serif;
+  font-size:10rem;line-height:0.7;
+  color:var(--gold2);opacity:0.08;
+  display:block;margin-bottom:-1.5rem;
+}
+.qb-q{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.8rem);
+  font-weight:300;font-style:italic;
+  color:rgba(255,255,255,0.80);
+  line-height:1.6;margin-bottom:2.5rem;
+}
+.qb-q em{color:var(--gold3);font-style:normal;}
+.qb-rule{
+  display:flex;align-items:center;justify-content:center;gap:1.8rem;
+}
+.qb-line{width:48px;height:1px;background:var(--gold2);opacity:0.4;}
+.qb-sig{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.58rem;font-weight:200;
+  letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+}
+
+/* ══════════════════════════════════
+   EXPERIENCE — editorial dark layout
+══════════════════════════════════ */
+.exp{
+  background:var(--ink);
+  padding:9rem 5rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:7rem;align-items:start;
+  position:relative;overflow:hidden;
+}
+.exp-left .s-label{color:rgba(232,192,96,0.65);}
+.exp-left .s-label::before{background:rgba(232,192,96,0.5);}
+.exp-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,3.2vw,3rem);
+  font-weight:400;color:#fff;
+  line-height:1.2;margin-bottom:1.4rem;
+}
+.exp-left h2 em{font-style:italic;color:var(--gold3);}
+.exp-left p{
+  font-size:0.88rem;font-weight:300;
+  color:rgba(255,255,255,0.32);
+  line-height:2.1;margin-bottom:3rem;
+}
+.exp-list{display:flex;flex-direction:column;}
+.exp-li{
+  display:grid;grid-template-columns:28px 1fr;
+  gap:1.2rem;align-items:start;
+  padding:1.4rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.055);
+  transition:background 0.2s;
+}
+.exp-li:first-child{border-top:1px solid rgba(255,255,255,0.055);}
+.exp-num{
+  font-family:'Playfair Display',serif;
+  font-size:0.72rem;font-weight:400;
+  color:var(--gold2);opacity:0.55;
+  padding-top:3px;letter-spacing:0.08em;
+}
+.exp-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.86rem;font-weight:400;
+  color:rgba(255,255,255,0.82);margin-bottom:0.22rem;
+}
+.exp-sub{
+  font-size:0.7rem;font-weight:300;
+  color:rgba(255,255,255,0.26);
+}
+/* Photo collage right */
+.exp-photos{position:relative;height:580px;}
+.ep-a{
+  position:absolute;left:0;top:0;
+  width:68%;height:390px;
+  border-radius:2px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,0.4);
+}
+.ep-a img{width:100%;height:100%;object-fit:cover;}
+.ep-b{
+  position:absolute;right:0;bottom:0;
+  width:58%;height:290px;
+  border-radius:2px;overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,0.4);
+  border:4px solid var(--ink);
+}
+.ep-b img{width:100%;height:100%;object-fit:cover;}
+/* Gold frame accent */
+.ep-gf{
+  position:absolute;right:-8px;top:-8px;
+  width:72px;height:72px;
+  border-top:1px solid var(--gold2);
+  border-right:1px solid var(--gold2);
+  opacity:0.28;pointer-events:none;
+}
+
+/* ══════════════════════════════════
+   TESTIMONIALS — magazine layout
+══════════════════════════════════ */
+.testi{
+  padding:9rem 5rem;
+  background:var(--warm);
+  position:relative;overflow:hidden;
+}
+.testi-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:4rem;position:relative;z-index:1;
+}
+.testi-head h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3vw,2.8rem);font-weight:400;
+}
+.testi-score-wrap{text-align:right;}
+.testi-score{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;font-weight:400;
+  color:var(--gold2);display:block;line-height:1;
+}
+.testi-source{
+  font-size:0.58rem;font-weight:300;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);
+}
+/* Big quote cards — magazine style */
+.testi-grid{
+  display:grid;grid-template-columns:1.3fr 1fr 1fr;
+  gap:20px;position:relative;z-index:1;
+}
+.tc{
+  background:var(--ivory);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:2.4rem;
+  position:relative;overflow:hidden;
+  transition:transform 0.35s cubic-bezier(0.23,1,0.32,1),box-shadow 0.35s;
+}
+.tc::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--gold2),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.tc:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(19,16,10,0.1);}
+.tc:hover::after{opacity:1;}
+.tc-stars{
+  font-size:0.7rem;color:var(--gold2);
+  letter-spacing:0.2em;margin-bottom:1.4rem;
+}
+.tc-q{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;font-style:italic;font-weight:400;
+  color:var(--ink3);line-height:1.9;
+  margin-bottom:1.8rem;
+}
+.tc-featured .tc-q{font-size:1.15rem;}
+.tc-name{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.8rem;font-weight:400;color:var(--ink);
+}
+.tc-meta{
+  font-size:0.68rem;font-weight:300;
+  color:var(--muted);margin-top:0.12rem;
+}
+.tc-src{
+  display:flex;align-items:center;gap:0.5rem;
+  margin-top:1.3rem;padding-top:1.3rem;
+  border-top:1px solid var(--border);
+  font-size:0.58rem;font-weight:300;
+  color:var(--muted);letter-spacing:0.16em;text-transform:uppercase;
+}
+
+/* ══════════════════════════════════
+   RESERVE — full height split
+══════════════════════════════════ */
+.reserve{display:grid;grid-template-columns:1fr 1fr;min-height:720px;}
+/* Photo left side */
+.res-photo{
+  position:relative;overflow:hidden;
+  background-image:url('https://images.unsplash.com/photo-1601050690597-df0568f70950?w=900&q=90');
+  background-size:cover;background-position:center;
+}
+.res-photo-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(42,74,50,0.97) 0%,
+    rgba(42,74,50,0.78) 40%,
+    rgba(42,74,50,0.40) 100%
+  );
+}
+.res-photo-content{
+  position:absolute;inset:0;z-index:2;
+  padding:5rem;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.res-photo-content .s-label{color:rgba(232,192,96,0.6);}
+.res-photo-content .s-label::before{background:rgba(232,192,96,0.45);}
+.res-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3vw,2.8rem);font-weight:400;
+  color:#fff;line-height:1.2;margin-bottom:1.2rem;
+}
+.res-p{
+  font-size:0.86rem;font-weight:300;
+  color:rgba(255,255,255,0.48);line-height:2;
+  max-width:360px;margin-bottom:2.8rem;
+}
+.res-details{display:flex;flex-direction:column;gap:1.1rem;}
+.res-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  font-size:0.8rem;font-weight:300;
+  color:rgba(255,255,255,0.58);line-height:1.5;
+}
+.res-ico{
+  width:32px;height:32px;flex-shrink:0;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:1px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;
+}
+/* Form right side */
+.res-form-wrap{
+  background:var(--ivory);
+  padding:5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.res-form-wrap h3{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:400;
+  margin-bottom:2.8rem;color:var(--ink);
+}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.fg{margin-bottom:1.5rem;}
+.fl{
+  display:block;font-size:0.58rem;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.55rem;font-weight:300;
+}
+.fi,.fs{
+  width:100%;border:none;
+  border-bottom:1px solid var(--border2);
+  background:transparent;color:var(--ink);
+  padding:0.75rem 0;
+  font-family:'DM Sans',sans-serif;font-size:0.86rem;font-weight:300;
+  outline:none;transition:border-color 0.28s;
+  border-radius:0;appearance:none;
+}
+.fi::placeholder{color:rgba(122,104,72,0.3);}
+.fi:focus,.fs:focus{border-color:var(--sage);}
+.fs option{color:var(--ink);background:var(--ivory);}
+.fbtn{
+  width:100%;background:var(--sage);color:var(--ivory);
+  border:none;padding:1rem;
+  font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:400;
+  letter-spacing:0.2em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.28s;margin-top:0.5rem;
+  border-radius:1px;
+  box-shadow:0 6px 24px rgba(42,74,50,0.22);
+}
+.fbtn:hover{background:var(--sage2);transform:translateY(-1px);box-shadow:0 10px 32px rgba(42,74,50,0.28);}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer{
+  background:var(--ink);
+  padding:3rem 5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(164,120,10,0.14);
+}
+footer p{font-size:0.62rem;color:rgba(255,255,255,0.16);font-weight:200;letter-spacing:0.08em;}
+.footer-links{display:flex;gap:2.8rem;}
+.footer-links a{
+  font-size:0.6rem;font-weight:200;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.25s;
+}
+.footer-links a:hover{color:rgba(255,255,255,0.68);}
+
+/* ══════════════════════════════════
+   REVEAL ANIMATIONS
+══════════════════════════════════ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.rv.show{opacity:1;transform:translateY(0);}
+.rv1{transition-delay:0.10s;}
+.rv2{transition-delay:0.20s;}
+.rv3{transition-delay:0.30s;}
+
+@media(max-width:1024px){
+  nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+  .hero-content{padding:3rem 1.5rem;}
+  .hero-stats{display:none;}
+  .story,.exp{grid-template-columns:1fr;padding:5rem 1.5rem;gap:4rem;}
+  .story-photos,.exp-photos{display:none;}
+  .pillars{grid-template-columns:1fr 1fr;}
+  .menu-sec,.testi,.quote-break{padding:5rem 1.5rem;}
+  .menu-grid,.testi-grid{grid-template-columns:1fr;}
+  .mc-featured .mc-img{height:300px;}
+  .menu-top{flex-direction:column;align-items:flex-start;gap:1.5rem;}
+  .reserve{grid-template-columns:1fr;}.res-form-wrap{padding:3rem 1.5rem;}
+  .res-photo{min-height:400px;}
+  footer{flex-direction:column;gap:1.5rem;text-align:center;padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ ALL SVG WATERMARK SYMBOLS ══ -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden;">
+<defs>
+<symbol id="leaf" viewBox="0 0 160 380">
+  <path d="M80,6 C118,6 148,40 155,90 C162,140 158,200 148,250 C138,295 118,340 100,362 C92,372 86,378 80,380 C74,378 68,372 60,362 C42,340 22,295 12,250 C2,200 -2,140 5,90 C12,40 42,6 80,6Z" fill="currentColor"/>
+  <line x1="80" y1="6"   x2="80" y2="380" stroke="rgba(255,255,255,0.38)" stroke-width="2.8"/>
+  <line x1="80" y1="55"  x2="20"  y2="96"  stroke="rgba(255,255,255,0.20)" stroke-width="1.3"/>
+  <line x1="80" y1="95"  x2="12"  y2="140" stroke="rgba(255,255,255,0.17)" stroke-width="1.2"/>
+  <line x1="80" y1="135" x2="8"   y2="183" stroke="rgba(255,255,255,0.15)" stroke-width="1.1"/>
+  <line x1="80" y1="175" x2="8"   y2="223" stroke="rgba(255,255,255,0.14)" stroke-width="1.1"/>
+  <line x1="80" y1="215" x2="12"  y2="260" stroke="rgba(255,255,255,0.13)" stroke-width="1.0"/>
+  <line x1="80" y1="252" x2="22"  y2="292" stroke="rgba(255,255,255,0.12)" stroke-width="0.9"/>
+  <line x1="80" y1="288" x2="36"  y2="322" stroke="rgba(255,255,255,0.11)" stroke-width="0.9"/>
+  <line x1="80" y1="320" x2="55"  y2="350" stroke="rgba(255,255,255,0.09)" stroke-width="0.8"/>
+  <line x1="80" y1="55"  x2="140" y2="96"  stroke="rgba(255,255,255,0.20)" stroke-width="1.3"/>
+  <line x1="80" y1="95"  x2="148" y2="140" stroke="rgba(255,255,255,0.17)" stroke-width="1.2"/>
+  <line x1="80" y1="135" x2="152" y2="183" stroke="rgba(255,255,255,0.15)" stroke-width="1.1"/>
+  <line x1="80" y1="175" x2="152" y2="223" stroke="rgba(255,255,255,0.14)" stroke-width="1.1"/>
+  <line x1="80" y1="215" x2="148" y2="260" stroke="rgba(255,255,255,0.13)" stroke-width="1.0"/>
+  <line x1="80" y1="252" x2="138" y2="292" stroke="rgba(255,255,255,0.12)" stroke-width="0.9"/>
+  <line x1="80" y1="288" x2="124" y2="322" stroke="rgba(255,255,255,0.11)" stroke-width="0.9"/>
+  <line x1="80" y1="320" x2="105" y2="350" stroke="rgba(255,255,255,0.09)" stroke-width="0.8"/>
+</symbol>
+<symbol id="gopuram" viewBox="0 0 200 290">
+  <rect x="0"  y="248" width="200" height="42" rx="2" fill="currentColor" opacity="0.90"/>
+  <rect x="7"  y="218" width="186" height="32" rx="2" fill="currentColor" opacity="0.88"/>
+  <rect x="16" y="190" width="168" height="30" rx="2" fill="currentColor" opacity="0.86"/>
+  <rect x="26" y="165" width="148" height="27" rx="2" fill="currentColor" opacity="0.84"/>
+  <rect x="36" y="142" width="128" height="25" rx="2" fill="currentColor" opacity="0.82"/>
+  <rect x="46" y="121" width="108" height="23" rx="2" fill="currentColor" opacity="0.80"/>
+  <rect x="55" y="102" width="90"  height="21" rx="2" fill="currentColor" opacity="0.78"/>
+  <rect x="63" y="84"  width="74"  height="20" rx="2" fill="currentColor" opacity="0.76"/>
+  <rect x="70" y="68"  width="60"  height="18" rx="2" fill="currentColor" opacity="0.74"/>
+  <rect x="76" y="54"  width="48"  height="16" rx="2" fill="currentColor" opacity="0.72"/>
+  <rect x="81" y="42"  width="38"  height="14" rx="2" fill="currentColor" opacity="0.70"/>
+  <rect x="85" y="32"  width="30"  height="12" rx="2" fill="currentColor" opacity="0.68"/>
+  <path d="M90 32 L100 6 L110 32Z" fill="currentColor" opacity="0.84"/>
+  <ellipse cx="100" cy="5"  rx="6.5" ry="9" fill="currentColor" opacity="0.88"/>
+  <circle  cx="100" cy="-7" r="3.5"          fill="currentColor" opacity="0.88"/>
+  <line x1="0"  y1="260" x2="200" y2="260" stroke="rgba(255,255,255,0.14)" stroke-width="0.9"/>
+  <line x1="7"  y1="231" x2="193" y2="231" stroke="rgba(255,255,255,0.11)" stroke-width="0.8"/>
+  <path d="M82 290 L82 263 Q100 251 118 263 L118 290Z" fill="rgba(0,0,0,0.18)"/>
+  <path d="M82 263 Q100 248 118 263" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.2"/>
+</symbol>
+<symbol id="kolam" viewBox="0 0 220 220">
+  <path d="M110,4 L216,110 L110,216 L4,110 Z" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.58"/>
+  <path d="M110,18 L202,110 L110,202 L18,110 Z" fill="none" stroke="currentColor" stroke-width="1.0" opacity="0.48"/>
+  <line x1="62" y1="62"  x2="158" y2="62"  stroke="currentColor" stroke-width="1.0" opacity="0.42" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="82"  x2="158" y2="82"  stroke="currentColor" stroke-width="0.9" opacity="0.38" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="102" x2="158" y2="102" stroke="currentColor" stroke-width="1.1" opacity="0.44" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="118" x2="158" y2="118" stroke="currentColor" stroke-width="1.2" opacity="0.48" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="138" x2="158" y2="138" stroke="currentColor" stroke-width="1.0" opacity="0.42" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="158" x2="158" y2="158" stroke="currentColor" stroke-width="0.9" opacity="0.38" transform="rotate(-45 110 110)"/>
+  <line x1="62" y1="62"  x2="158" y2="62"  stroke="currentColor" stroke-width="1.0" opacity="0.42" transform="rotate(45 110 110)"/>
+  <line x1="62" y1="82"  x2="158" y2="82"  stroke="currentColor" stroke-width="0.9" opacity="0.38" transform="rotate(45 110 110)"/>
+  <line x1="62" y1="102" x2="158" y2="102" stroke="currentColor" stroke-width="1.1" opacity="0.44" transform="rotate(45 110 110)"/>
+  <line x1="62" y1="118" x2="158" y2="118" stroke="currentColor" stroke-width="1.2" opacity="0.48" transform="rotate(45 110 110)"/>
+  <line x1="62" y1="138" x2="158" y2="138" stroke="currentColor" stroke-width="1.0" opacity="0.42" transform="rotate(45 110 110)"/>
+  <line x1="62" y1="158" x2="158" y2="158" stroke="currentColor" stroke-width="0.9" opacity="0.38" transform="rotate(45 110 110)"/>
+  <circle cx="110" cy="110" r="3.5" fill="currentColor" opacity="0.72"/>
+  <circle cx="110" cy="78"  r="2.8" fill="currentColor" opacity="0.62"/>
+  <circle cx="110" cy="142" r="2.8" fill="currentColor" opacity="0.62"/>
+  <circle cx="78"  cy="110" r="2.8" fill="currentColor" opacity="0.62"/>
+  <circle cx="142" cy="110" r="2.8" fill="currentColor" opacity="0.62"/>
+  <circle cx="88"  cy="88"  r="2.2" fill="currentColor" opacity="0.52"/>
+  <circle cx="132" cy="88"  r="2.2" fill="currentColor" opacity="0.52"/>
+  <circle cx="88"  cy="132" r="2.2" fill="currentColor" opacity="0.52"/>
+  <circle cx="132" cy="132" r="2.2" fill="currentColor" opacity="0.52"/>
+  <circle cx="110" cy="52"  r="2"   fill="currentColor" opacity="0.45"/>
+  <circle cx="110" cy="168" r="2"   fill="currentColor" opacity="0.45"/>
+  <circle cx="52"  cy="110" r="2"   fill="currentColor" opacity="0.45"/>
+  <circle cx="168" cy="110" r="2"   fill="currentColor" opacity="0.45"/>
+  <path d="M110,4  Q117,11 110,18 Q103,11 110,4"  fill="currentColor" opacity="0.38"/>
+  <path d="M216,110 Q209,117 202,110 Q209,103 216,110" fill="currentColor" opacity="0.38"/>
+  <path d="M110,216 Q103,209 110,202 Q117,209 110,216" fill="currentColor" opacity="0.38"/>
+  <path d="M4,110  Q11,103 18,110  Q11,117 4,110"  fill="currentColor" opacity="0.38"/>
+</symbol>
+<symbol id="dancer" viewBox="0 0 170 270">
+  <circle cx="85" cy="22" r="14" fill="currentColor" opacity="0.72"/>
+  <path d="M74 14 Q79 1  85 -3 Q91 1  96 14" stroke="currentColor" stroke-width="2.2" fill="none" opacity="0.70"/>
+  <circle cx="85" cy="-5" r="4"   fill="currentColor" opacity="0.70"/>
+  <circle cx="75" cy="12" r="1.8" fill="currentColor" opacity="0.55"/>
+  <circle cx="95" cy="12" r="1.8" fill="currentColor" opacity="0.55"/>
+  <rect x="82" y="36" width="6" height="12" rx="2" fill="currentColor" opacity="0.65"/>
+  <path d="M85 48 L85 100" stroke="currentColor" stroke-width="8" stroke-linecap="round" opacity="0.68"/>
+  <path d="M80 58 Q62 46 44 30 Q36 22 30 14" stroke="currentColor" stroke-width="5"   stroke-linecap="round" fill="none" opacity="0.72"/>
+  <path d="M30 14 Q24 8  22 4"  stroke="currentColor" stroke-width="3"   stroke-linecap="round" fill="none" opacity="0.60"/>
+  <path d="M90 60 Q110 62 130 58 Q140 54 148 52" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.72"/>
+  <path d="M148 52 Q155 47 158 43" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.60"/>
+  <path d="M74 96 Q48 115 36 145 Q26 166 30 185 L85 168 L140 185 Q144 166 134 145 Q122 115 96 96Z" fill="currentColor" opacity="0.26"/>
+  <path d="M78 102 Q64 124 56 150" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" fill="none" opacity="0.68"/>
+  <path d="M56 150 Q48 170 46 192" stroke="currentColor" stroke-width="5"   stroke-linecap="round" fill="none" opacity="0.65"/>
+  <path d="M92 102 Q106 118 118 132" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" fill="none" opacity="0.68"/>
+  <path d="M118 132 Q132 148 142 162" stroke="currentColor" stroke-width="5"   stroke-linecap="round" fill="none" opacity="0.65"/>
+  <rect x="26"  y="196" width="20" height="6" rx="3" fill="currentColor" opacity="0.58"/>
+  <rect x="140" y="160" width="16" height="6" rx="3" fill="currentColor" opacity="0.58"/>
+</symbol>
+<symbol id="coffee" viewBox="0 0 140 200">
+  <ellipse cx="70" cy="74" rx="50" ry="13" fill="currentColor" opacity="0.56"/>
+  <path d="M20 74 Q16 58 20 44 Q35 28 70 26 Q105 28 120 44 Q124 58 120 74Z" fill="currentColor" opacity="0.40"/>
+  <ellipse cx="70" cy="74" rx="44" ry="10" fill="currentColor" opacity="0.28"/>
+  <path d="M34 132 Q30 112 32 96 Q34 86 70 84 Q106 86 108 96 Q110 112 106 132Z" fill="currentColor" opacity="0.50"/>
+  <ellipse cx="70" cy="86"  rx="38" ry="9"  fill="currentColor" opacity="0.56"/>
+  <ellipse cx="70" cy="134" rx="34" ry="8"  fill="currentColor" opacity="0.46"/>
+  <path d="M70 76 Q70 80 70 84" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.46"/>
+  <path d="M48 68 Q44 56 48 44 Q52 32 48 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.40"/>
+  <path d="M70 64 Q66 50 70 36 Q74 22 70 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.36"/>
+  <path d="M92 68 Q96 56 92 44 Q88 32 92 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.40"/>
+  <ellipse cx="70" cy="138" rx="46" ry="10" fill="currentColor" opacity="0.28"/>
+  <path d="M108 98 Q122 102 122 114 Q122 126 108 128" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.42"/>
+  <ellipse cx="16"  cy="152" rx="8" ry="4.5" fill="currentColor" opacity="0.28" transform="rotate(-28 16 152)"/>
+  <ellipse cx="124" cy="158" rx="8" ry="4.5" fill="currentColor" opacity="0.28" transform="rotate(22 124 158)"/>
+  <ellipse cx="52"  cy="178" rx="6" ry="3.5" fill="currentColor" opacity="0.20" transform="rotate(40 52 178)"/>
+  <ellipse cx="90"  cy="180" rx="6" ry="3.5" fill="currentColor" opacity="0.20" transform="rotate(-36 90 180)"/>
+</symbol>
+<symbol id="coconut" viewBox="0 0 100 240">
+  <path d="M52 234 Q48 200 50 165 Q52 130 50 95 Q48 65 53 38" stroke="currentColor" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.65"/>
+  <path d="M52 42 Q28 18 8 4"   stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <path d="M52 42 Q76 16 96 4"  stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+  <path d="M52 42 Q22 30 6 38"  stroke="currentColor" stroke-width="3"   stroke-linecap="round" fill="none" opacity="0.65"/>
+  <path d="M52 42 Q82 28 96 38" stroke="currentColor" stroke-width="3"   stroke-linecap="round" fill="none" opacity="0.65"/>
+  <path d="M52 42 Q18 42 4 60"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.60"/>
+  <path d="M52 42 Q86 40 98 58" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.60"/>
+  <circle cx="48" cy="46" r="8"  fill="currentColor" opacity="0.55"/>
+  <circle cx="57" cy="48" r="7"  fill="currentColor" opacity="0.50"/>
+  <circle cx="52" cy="54" r="6"  fill="currentColor" opacity="0.45"/>
+</symbol>
+<symbol id="vilakku" viewBox="0 0 90 180">
+  <rect x="22" y="158" width="46" height="22" rx="3" fill="currentColor" opacity="0.62"/>
+  <rect x="27" y="136" width="36" height="24" rx="2" fill="currentColor" opacity="0.66"/>
+  <ellipse cx="45" cy="134" rx="32" ry="8" fill="currentColor" opacity="0.70"/>
+  <rect x="41" y="90"  width="8" height="46" rx="2" fill="currentColor" opacity="0.65"/>
+  <ellipse cx="45" cy="88" rx="22" ry="7" fill="currentColor" opacity="0.72"/>
+  <path d="M23 88 Q25 76 45 74 Q65 76 67 88" fill="currentColor" opacity="0.35"/>
+  <path d="M30 74 Q28 62 30 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.62"/>
+  <path d="M45 72 Q43 58 45 46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+  <path d="M60 74 Q62 62 60 52" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.62"/>
+  <ellipse cx="30" cy="48" rx="5" ry="7" fill="currentColor" opacity="0.58"/>
+  <ellipse cx="45" cy="42" rx="5" ry="8" fill="currentColor" opacity="0.62"/>
+  <ellipse cx="60" cy="48" rx="5" ry="7" fill="currentColor" opacity="0.58"/>
+  <path d="M23 104 Q8  100 4  110" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.56"/>
+  <path d="M67 104 Q82 100 86 110" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.56"/>
+  <ellipse cx="4"  cy="112" rx="8" ry="3.5" fill="currentColor" opacity="0.46"/>
+  <ellipse cx="86" cy="112" rx="8" ry="3.5" fill="currentColor" opacity="0.46"/>
+</symbol>
+</defs>
+</svg>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <!-- PONNI LOGO — Kuthu Vilakku mark in a thin circle + Playfair SC wordmark -->
+  <a href="#" class="ponni-logo">
+    <svg class="ponni-logo-mark" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer thin circle -->
+      <circle cx="22" cy="22" r="20.5" stroke="#A67C0A" stroke-width="0.8" opacity="0.6"/>
+      <!-- Inner circle -->
+      <circle cx="22" cy="22" r="17" stroke="#A67C0A" stroke-width="0.5" opacity="0.3"/>
+      <!-- Lamp base -->
+      <rect x="16" y="34" width="12" height="4" rx="1.5" fill="#2A4A32" opacity="0.85"/>
+      <!-- Lamp pedestal -->
+      <rect x="18" y="30" width="8" height="5"  rx="1" fill="#2A4A32" opacity="0.80"/>
+      <!-- Lamp wide dish -->
+      <path d="M13 30 Q14 26 22 25 Q30 26 31 30Z" fill="#2A4A32" opacity="0.75"/>
+      <!-- Central column -->
+      <rect x="20.5" y="20" width="3" height="10" rx="1" fill="#2A4A32" opacity="0.70"/>
+      <!-- Oil cup -->
+      <ellipse cx="22" cy="20" rx="7" ry="2.5" fill="#2A4A32" opacity="0.72"/>
+      <!-- Three flames -->
+      <path d="M17 18 Q16 14 17.5 11" stroke="#A67C0A" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+      <path d="M22 17 Q21 12 22 9"    stroke="#C49A1A" stroke-width="2"   stroke-linecap="round" opacity="0.85"/>
+      <path d="M27 18 Q28 14 26.5 11" stroke="#A67C0A" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+      <!-- Flame tips (ellipses) -->
+      <ellipse cx="17.5" cy="10.5" rx="1.8" ry="2.5" fill="#A67C0A" opacity="0.65"/>
+      <ellipse cx="22"   cy="8.5"  rx="2"   ry="3"   fill="#E8C060" opacity="0.80"/>
+      <ellipse cx="26.5" cy="10.5" rx="1.8" ry="2.5" fill="#A67C0A" opacity="0.65"/>
+      <!-- Side arms -->
+      <path d="M15 25 Q9 24 7 28"  stroke="#2A4A32" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.65"/>
+      <path d="M29 25 Q35 24 37 28" stroke="#2A4A32" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.65"/>
+      <ellipse cx="6.5"  cy="29" rx="3" ry="1.5" fill="#2A4A32" opacity="0.55"/>
+      <ellipse cx="37.5" cy="29" rx="3" ry="1.5" fill="#2A4A32" opacity="0.55"/>
+    </svg>
+    <div class="ponni-logo-text">
+      <span class="ponni-logo-name">Ponni</span>
+      <div class="ponni-logo-divider"></div>
+      <span class="ponni-logo-sub">Est. MMXII &nbsp;·&nbsp; Chennai</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#reserve" class="nav-book">Reserve a Table</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <!-- Banana leaf watermarks hero -->
+  <svg class="wm" style="top:-50px;left:-40px;width:270px;opacity:0.12;color:#2A4A32;transform:rotate(-20deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="bottom:-70px;left:180px;width:200px;opacity:0.08;color:#2A4A32;transform:rotate(26deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="bottom:60px;left:420px;width:145px;opacity:0.065;color:#2A4A32;" viewBox="0 0 220 220"><use href="#kolam"/></svg>
+
+  <div class="hero-bg">
+    <!-- Leaf watermarks on photo side -->
+    <svg class="wm" style="top:-20px;right:-25px;width:220px;opacity:0.16;color:#fff;transform:rotate(20deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+    <svg class="wm" style="bottom:100px;left:-15px;width:175px;opacity:0.12;color:#fff;transform:rotate(-17deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  </div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-vline"></div>
+
+  <div class="hero-content">
+    <div class="hero-overline">
+      <div class="hero-overline-dash"></div>
+      <span class="hero-overline-text">Chettinad Kitchen &nbsp;·&nbsp; Chennai &nbsp;·&nbsp; Est. 2012</span>
+    </div>
+    <div class="hero-h hero-h1">Cooking the way</div>
+    <div class="hero-h hero-h2">grandmothers</div>
+    <div class="hero-h hero-h3">always did.</div>
+    <p class="hero-body">Every dish built on one promise — no shortcuts. Freshly ground spices each morning, slow-cooked gravies, and recipes that have outlived three generations of memory and love.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-sage">Explore the Menu</a>
+      <a href="#story" class="btn-outline-sage">
+        Our Story
+        <span class="btn-outline-sage-arrow"></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div><span class="hstat-num">12+</span><span class="hstat-label">Years</span></div>
+    <div><span class="hstat-num">4.9★</span><span class="hstat-label">Zomato</span></div>
+    <div><span class="hstat-num">500+</span><span class="hstat-label">Daily Guests</span></div>
+  </div>
+</section>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="mq-i">Fresh ground spices <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Wood fire cooking <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Banana leaf dining <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Ancestral Chettinad recipes <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Best Restaurant · Times Food 2024 <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Private dining available <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Degree filter coffee <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Fresh ground spices <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Wood fire cooking <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Banana leaf dining <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Ancestral Chettinad recipes <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Best Restaurant · Times Food 2024 <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Private dining available <span class="mq-gem">◆</span></div>
+    <div class="mq-i">Degree filter coffee <span class="mq-gem">◆</span></div>
+  </div>
+</div>
+
+<!-- ══════════ STORY ══════════ -->
+<section class="story" id="story">
+  <!-- Watermarks -->
+  <svg class="wm" style="right:-45px;top:-25px;width:320px;opacity:0.11;color:#2A4A32;transform:rotate(26deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="left:-35px;bottom:-40px;width:245px;opacity:0.08;color:#2A4A32;transform:rotate(-16deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:60px;bottom:25px;width:100px;opacity:0.10;color:#2A4A32;" viewBox="0 0 200 290"><use href="#gopuram"/></svg>
+  <svg class="wm" style="right:175px;top:60px;width:120px;opacity:0.075;color:#2A4A32;" viewBox="0 0 220 220"><use href="#kolam"/></svg>
+
+  <div class="story-photos rv">
+    <div class="sp-frame"></div>
+    <div class="sp-ghost">2012</div>
+    <div class="sp-main">
+      <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=88" alt="Chettinad cuisine" loading="lazy"/>
+    </div>
+    <div class="sp-accent">
+      <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=88" alt="Spices" loading="lazy"/>
+    </div>
+  </div>
+
+  <div class="story-text rv rv1">
+    <div class="s-label">Our Story</div>
+    <h2>Rooted in Karaikudi.<br>Cooking for Chennai.</h2>
+    <p>Ponni began in 2012 in a small rented kitchen in T. Nagar. Founder Meenakshi Rajan had one goal — to cook exactly the way her mother did in Karaikudi, and share it with people who had never tasted real Chettinad food.</p>
+    <p>She brought her mother's stone grinder, her grandmother's clay pots, and fifteen years of watching, learning and tasting. No recipe books. Just memory, love and stubbornness to never take shortcuts.</p>
+    <div class="story-pull">
+      <blockquote>"We don't cook food. We cook memories. And memories don't take shortcuts."</blockquote>
+      <cite>— Meenakshi Rajan, Founder & Head Chef</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PILLARS ══════════ -->
+<div class="pillars">
+  <div class="pillar rv">
+    <span class="pillar-n">01</span>
+    <h3>Fresh Ground Spices</h3>
+    <p>Masalas ground every morning on a stone grinder. Never pre-packed, never compromised.</p>
+  </div>
+  <div class="pillar rv rv1">
+    <span class="pillar-n">02</span>
+    <h3>Wood Fire Kitchen</h3>
+    <p>Open fire kitchen — watch every dish come to life. No curtains, no secrets.</p>
+  </div>
+  <div class="pillar rv rv2">
+    <span class="pillar-n">03</span>
+    <h3>Banana Leaf Dining</h3>
+    <p>Traditional Chettinad banana leaf service for lunch, every single day.</p>
+  </div>
+  <div class="pillar rv rv3">
+    <span class="pillar-n">04</span>
+    <h3>Ancestral Recipes</h3>
+    <p>Three generations. Not one recipe has been modified for convenience or speed.</p>
+  </div>
+</div>
+
+<!-- ══════════ MENU ══════════ -->
+<section class="menu-sec" id="menu">
+  <!-- Watermarks -->
+  <svg class="wm" style="right:-45px;bottom:-20px;width:330px;opacity:0.10;color:#2A4A32;transform:rotate(-29deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="left:-28px;top:-10px;width:220px;opacity:0.08;color:#2A4A32;transform:rotate(20deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:100px;top:5px;width:78px;opacity:0.10;color:#2A4A32;" viewBox="0 0 100 240"><use href="#coconut"/></svg>
+  <svg class="wm" style="left:80px;bottom:0;width:96px;opacity:0.09;color:#2A4A32;" viewBox="0 0 170 270"><use href="#dancer"/></svg>
+
+  <div class="menu-top rv">
+    <div>
+      <div class="s-label">Signature Dishes</div>
+      <h2>What we're<br>known for</h2>
+    </div>
+    <div class="menu-top-right">
+      <div class="menu-tabs">
+        <button class="mt active">Mains</button>
+        <button class="mt">Breakfast</button>
+        <button class="mt">Vegetarian</button>
+        <button class="mt">Desserts</button>
+      </div>
+      <a href="#" class="view-all">View full menu →</a>
+    </div>
+  </div>
+
+  <div class="menu-grid rv rv1">
+    <!-- Featured large card -->
+    <div class="mc mc-featured">
+      <div class="mc-img" style="background-image:url('https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&q=88');height:520px;"></div>
+      <div class="mc-overlay">
+        <div class="mc-tag">Chef's Signature</div>
+        <h3>Chettinad Chicken Curry</h3>
+        <p class="mc-desc">Slow-cooked 6 hours with 18 freshly ground spices. Served with steamed red rice or parotta.</p>
+        <div class="mc-footer"><span class="mc-price">₹320</span><div class="mc-vd nv"></div></div>
+      </div>
+    </div>
+    <!-- Regular cards -->
+    <div class="mc">
+      <div class="mc-img" style="background-image:url('https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=88');height:240px;"></div>
+      <div class="mc-overlay">
+        <div class="mc-tag">Bestseller</div>
+        <h3>Prawn Masala Kuzhambu</h3>
+        <p class="mc-desc">Tiger prawns in a rich coastal coconut-tomato gravy.</p>
+        <div class="mc-footer"><span class="mc-price">₹420</span><div class="mc-vd nv"></div></div>
+      </div>
+    </div>
+    <div class="mc">
+      <div class="mc-img" style="background-image:url('https://images.unsplash.com/photo-1567337710282-00832b415979?w=600&q=88');height:240px;"></div>
+      <div class="mc-overlay">
+        <div class="mc-tag">Vegetarian</div>
+        <h3>Aged Ghee Roast Dosa</h3>
+        <p class="mc-desc">72-hour fermented batter, cast iron tawa, cultured ghee.</p>
+        <div class="mc-footer"><span class="mc-price">₹180</span><div class="mc-vd v"></div></div>
+      </div>
+    </div>
+    <div class="mc">
+      <div class="mc-img" style="background-image:url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=88');height:240px;"></div>
+      <div class="mc-overlay">
+        <div class="mc-tag">Weekend Only</div>
+        <h3>Clay Pot Mutton Kuzhambu</h3>
+        <p class="mc-desc">8-hour slow fire, kalpasi, marathi mokku, sealed clay pot.</p>
+        <div class="mc-footer"><span class="mc-price">₹480</span><div class="mc-vd nv"></div></div>
+      </div>
+    </div>
+    <div class="mc">
+      <div class="mc-img" style="background-image:url('https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&q=88');height:240px;"></div>
+      <div class="mc-overlay">
+        <div class="mc-tag">Lunch Only</div>
+        <h3>Banana Leaf Meals</h3>
+        <p class="mc-desc">Rice, sambar, rasam, kootu, three curries, pappadam, payasam.</p>
+        <div class="mc-footer"><span class="mc-price">₹280</span><div class="mc-vd v"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PULL QUOTE ══════════ -->
+<div class="quote-break">
+  <svg class="wm" style="left:-35px;top:-15px;width:285px;opacity:0.08;color:#3A6044;transform:rotate(14deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:-25px;bottom:-25px;width:240px;opacity:0.07;color:#3A6044;transform:rotate(-20deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:10%;top:15px;width:58px;opacity:0.13;color:#C49A1A;" viewBox="0 0 90 180"><use href="#vilakku"/></svg>
+  <svg class="wm" style="left:10%;bottom:15px;width:72px;opacity:0.11;color:#C49A1A;" viewBox="0 0 140 200"><use href="#coffee"/></svg>
+
+  <div class="qb-inner rv">
+    <span class="qb-mark">"</span>
+    <p class="qb-q">
+      The finest table is not the one with the most stars —<br>
+      it is the one that makes you feel <em>you have come home.</em>
+    </p>
+    <div class="qb-rule">
+      <div class="qb-line"></div>
+      <span class="qb-sig">Ponni &nbsp;·&nbsp; T. Nagar, Chennai &nbsp;·&nbsp; Est. 2012</span>
+      <div class="qb-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section class="exp" id="experience">
+  <svg class="wm" style="left:-30px;top:-20px;width:280px;opacity:0.10;color:#3A6044;transform:rotate(15deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:-20px;bottom:-28px;width:220px;opacity:0.08;color:#3A6044;transform:rotate(-22deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:42%;top:25px;width:60px;opacity:0.13;color:#C49A1A;" viewBox="0 0 90 180"><use href="#vilakku"/></svg>
+  <svg class="wm" style="right:38%;bottom:22px;width:75px;opacity:0.11;color:#C49A1A;" viewBox="0 0 140 200"><use href="#coffee"/></svg>
+
+  <div class="exp-left rv">
+    <div class="s-label exp-label">The Experience</div>
+    <h2>Some meals deserve<br>to be eaten <em>slowly.</em></h2>
+    <p>We've thought about every detail — the warmth of the lighting, the sound of the open kitchen, the banana leaf freshly laid before you. Dining at Ponni is not simply eating. It is a beautiful, deliberate pause.</p>
+    <div class="exp-list">
+      <div class="exp-li"><span class="exp-num">01</span><div><div class="exp-title">Banana Leaf Service</div><div class="exp-sub">Traditional Chettinad style · Lunch served daily</div></div></div>
+      <div class="exp-li"><span class="exp-num">02</span><div><div class="exp-title">Open Wood Fire Kitchen</div><div class="exp-sub">Watch your meal come to life — no curtains, no secrets</div></div></div>
+      <div class="exp-li"><span class="exp-num">03</span><div><div class="exp-title">Live Carnatic Music</div><div class="exp-sub">Every Tuesday & Friday evening, 7 – 9 PM</div></div></div>
+      <div class="exp-li"><span class="exp-num">04</span><div><div class="exp-title">Private Dining Room</div><div class="exp-sub">Up to 20 guests · Advance booking required</div></div></div>
+    </div>
+  </div>
+
+  <div class="exp-photos rv rv1">
+    <div class="ep-gf"></div>
+    <div class="ep-a"><img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=700&q=88" alt="Dosa" loading="lazy"/></div>
+    <div class="ep-b"><img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&q=88" alt="Food" loading="lazy"/></div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section class="testi">
+  <svg class="wm" style="right:-30px;top:-10px;width:260px;opacity:0.11;color:#2A4A32;transform:rotate(-18deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="left:-38px;bottom:-18px;width:210px;opacity:0.09;color:#2A4A32;transform:rotate(22deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+  <svg class="wm" style="right:110px;bottom:0;width:88px;opacity:0.11;color:#2A4A32;" viewBox="0 0 170 270"><use href="#dancer"/></svg>
+  <svg class="wm" style="left:92px;top:18px;width:82px;opacity:0.10;color:#2A4A32;" viewBox="0 0 200 290"><use href="#gopuram"/></svg>
+
+  <div class="testi-head rv">
+    <div>
+      <div class="s-label">Guest Reviews</div>
+      <h2>What people<br>are saying</h2>
+    </div>
+    <div class="testi-score-wrap">
+      <span class="testi-score">4.9★</span>
+      <span class="testi-source">1,200+ reviews on Zomato</span>
+    </div>
+  </div>
+
+  <div class="testi-grid rv rv1">
+    <div class="tc tc-featured">
+      <div class="tc-stars">★ ★ ★ ★ ★</div>
+      <p class="tc-q">"The Chettinad Chicken took me straight back to Karaikudi. I closed my eyes and I was in my Paati's kitchen. I don't say that lightly — this is the real thing."</p>
+      <div class="tc-name">Priya Venkatesh</div>
+      <div class="tc-meta">Chennai · January 2026</div>
+      <div class="tc-src">⭐ Verified Zomato Review</div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★ ★ ★ ★ ★</div>
+      <p class="tc-q">"Drove from Bangalore just for the Clay Pot Mutton. Worth every kilometre. The banana leaf experience is something no city restaurant offers anymore."</p>
+      <div class="tc-name">Arjun Krishnamurthy</div>
+      <div class="tc-meta">Bangalore · February 2026</div>
+      <div class="tc-src">⭐ Google Review</div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★ ★ ★ ★ ★</div>
+      <p class="tc-q">"The Ghee Roast Dosa is the best I've had in Chennai — full stop. Live Carnatic music on Friday evenings makes it absolutely magical."</p>
+      <div class="tc-name">Meera Sundaram</div>
+      <div class="tc-meta">Coimbatore · March 2026</div>
+      <div class="tc-src">⭐ Verified Zomato Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESERVE ══════════ -->
+<section class="reserve" id="reserve">
+  <div class="res-photo">
+    <div class="res-photo-ov"></div>
+    <svg class="wm" style="top:-20px;right:-12px;width:220px;opacity:0.17;color:#fff;transform:rotate(20deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+    <svg class="wm" style="bottom:90px;left:-10px;width:170px;opacity:0.13;color:#fff;transform:rotate(-15deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+    <svg class="wm" style="right:55px;bottom:60px;width:65px;opacity:0.17;color:#fff;" viewBox="0 0 100 240"><use href="#coconut"/></svg>
+    <svg class="wm" style="left:52px;top:62px;width:62px;opacity:0.15;color:#C49A1A;" viewBox="0 0 140 200"><use href="#coffee"/></svg>
+    <div class="res-photo-content">
+      <div class="s-label rv">Reservations</div>
+      <h2 class="res-h rv">Reserve your<br>table tonight</h2>
+      <p class="res-p rv">We welcome walk-ins warmly. But a reservation means your banana leaf is already waiting when you arrive.</p>
+      <div class="res-details rv">
+        <div class="res-row"><div class="res-ico">📍</div>14, North Usman Road, T. Nagar, Chennai — 600017</div>
+        <div class="res-row"><div class="res-ico">🕐</div>Monday to Sunday · 11:00 AM – 11:00 PM</div>
+        <div class="res-row"><div class="res-ico">📞</div>+91 98400 12345 · ponni@restaurant.in</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res-form-wrap">
+    <svg class="wm" style="bottom:-25px;right:-18px;width:220px;opacity:0.08;color:#2A4A32;transform:rotate(-17deg);" viewBox="0 0 160 380"><use href="#leaf"/></svg>
+    <svg class="wm" style="top:30px;right:48px;width:44px;opacity:0.08;color:#2A4A32;" viewBox="0 0 90 180"><use href="#vilakku"/></svg>
+    <h3 class="rv">Book a Table</h3>
+    <div class="rv rv1">
+      <div class="frow">
+        <div class="fg"><label class="fl">Full Name</label><input class="fi" type="text" placeholder="Your name"/></div>
+        <div class="fg"><label class="fl">Phone</label><input class="fi" type="tel" placeholder="+91 XXXXX XXXXX"/></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Date</label><input class="fi" type="date"/></div>
+        <div class="fg"><label class="fl">Time</label><input class="fi" type="time"/></div>
+      </div>
+      <div class="fg"><label class="fl">Number of Guests</label>
+        <select class="fs">
+          <option value="">Select guests</option>
+          <option>1 – 2 Guests</option>
+          <option>3 – 4 Guests</option>
+          <option>5 – 6 Guests</option>
+          <option>7 – 10 Guests</option>
+          <option>Private Dining (10+ Guests)</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Special Requests</label><input class="fi" type="text" placeholder="Allergies, occasions, seating preferences..."/></div>
+      <button class="fbtn">Confirm My Reservation</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <a href="#" class="ponni-logo ponni-logo-inv" style="text-decoration:none;">
+    <svg class="ponni-logo-mark" viewBox="0 0 44 44" fill="none">
+      <circle cx="22" cy="22" r="20.5" stroke="#A67C0A" stroke-width="0.8" opacity="0.4"/>
+      <rect x="16" y="34" width="12" height="4" rx="1.5" fill="rgba(255,255,255,0.4)" opacity="0.7"/>
+      <rect x="18" y="30" width="8" height="5" rx="1" fill="rgba(255,255,255,0.4)" opacity="0.65"/>
+      <path d="M13 30 Q14 26 22 25 Q30 26 31 30Z" fill="rgba(255,255,255,0.35)" opacity="0.7"/>
+      <rect x="20.5" y="20" width="3" height="10" rx="1" fill="rgba(255,255,255,0.35)" opacity="0.65"/>
+      <ellipse cx="22" cy="20" rx="7" ry="2.5" fill="rgba(255,255,255,0.35)" opacity="0.65"/>
+      <path d="M22 17 Q21 12 22 9" stroke="#C49A1A" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+      <ellipse cx="22" cy="8.5" rx="2" ry="3" fill="#E8C060" opacity="0.65"/>
+    </svg>
+    <div class="ponni-logo-text">
+      <span class="ponni-logo-name">Ponni</span>
+      <div class="ponni-logo-divider"></div>
+      <span class="ponni-logo-sub">Est. MMXII &nbsp;·&nbsp; Chennai</span>
+    </div>
+  </a>
+  <p>© 2026 Ponni South Indian Kitchen &nbsp;·&nbsp; T. Nagar, Chennai</p>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Zomato</a>
+    <a href="#">Swiggy</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.mt').forEach((t,i,all) => {
+  t.addEventListener('click', () => {
+    all.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
